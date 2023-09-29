@@ -17,7 +17,7 @@ namespace Network
     class UDPClient : public Network::IClient<Receive, Send>
     {
     public:
-        UDPClient(const std::string &ip = "127.0.0.1", unsigned short port = 4242)
+        UDPClient(const std::string &ip = "127.0.0.1", unsigned short port = 12345)
             : _fd(-1), _servinfo(nullptr)
         {
             memset(&_sendData, 0, sizeof(Send));

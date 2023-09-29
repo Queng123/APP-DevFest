@@ -50,10 +50,10 @@ namespace Display {
                 BeginDrawing();
                 ClearBackground(BLACK);
                 _drawRadar();
-                // _drawBlasterOverheat();
-                // _drawMissileWarning();
-                // _drawShipState();
-                // _drawWallsWarning();
+                _drawBlasterOverheat();
+                _drawMissileWarning();
+                _drawShipState();
+                _drawWallsWarning();
                 EndDrawing();
             }
             void _update()
