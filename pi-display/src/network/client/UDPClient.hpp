@@ -115,7 +115,6 @@ namespace Network
         void _receive()
         {
             ssize_t received = Network::recvfrom(_fd, &_receiveData, sizeof(Receive), 0, _servinfo->ai_addr, &_servinfo->ai_addrlen);
-            std::cerr << "Received " << received << " bytes" << std::endl;
         }
         void _send()
         {

@@ -19,5 +19,7 @@ int main(void)
     Network::ThreadedUDPClient<Game::GameDatas, HuiInfo> client;
     Display::ThreadedGameDatasDisplay display(*client);
 
-    while (display.windowIsOpen());
+    while (display.windowIsOpen()) {
+        // std::cout << client->nbEnemies << std::endl;
+    }
 }
