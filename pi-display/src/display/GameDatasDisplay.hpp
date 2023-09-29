@@ -29,10 +29,9 @@ namespace Display {
             void run() override
             {
                 _setupWindow();
-                while (_windowIsOpen) {
+                while (windowIsOpen()) {
                     _update();
                 }
-                CloseWindow();
             }
             bool windowIsOpen() const
             {
@@ -63,23 +62,25 @@ namespace Display {
             }
             void _handleEvent()
             {
-                if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
+                if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) {
+                    CloseWindow();
                     _windowIsOpen = false;
+                }
             }
             void _drawRadar()
             {
                 // draw a cone representing the radar
-                DrawTriangle(
-                    {400, 300},
-                    {(float)(400 + (cos(_RADAR_ANGLE) * 200)), (float)(300 + (sin(_RADAR_ANGLE) * 200))},
-                    {(float)(400 + (cos(-_RADAR_ANGLE) * 200)), (float)(300 + (sin(-_RADAR_ANGLE) * 200))},
-                    RED
-                );
+                // DrawTriangle(
+                //     {400, 300},
+                //     {(float)(400 + (cos(_RADAR_ANGLE) * 200)), (float)(300 + (sin(_RADAR_ANGLE) * 200))},
+                //     {(float)(400 + (cos(-_RADAR_ANGLE) * 200)), (float)(300 + (sin(-_RADAR_ANGLE) * 200))},
+                //     RED
+                // );
             }
             void _drawBlasterOverheat()
             {
-                DrawRectangle(0, 0, _gameDatas.blasterOverheat, 20, RED);
-                DrawRectangle(0, 0, _MAX_BLASTER_OVER_HEAT, 20, GREEN);
+                // DrawRectangle(0, 0, _gameDatas.blasterOverheat, 20, RED);
+                // DrawRectangle(0, 0, _MAX_BLASTER_OVER_HEAT, 20, GREEN);
             }
             void _drawMissileWarning()
             {
