@@ -20,100 +20,25 @@ namespace Display
     {
     public:
         GameDatasDisplay(const Game::GameDatas &gameDatas)
-            : _gameDatas(gameDatas), _windowIsOpen(true) {};
+            : _gameDatas(gameDatas), _windowIsOpen(true){};
 
-        ~GameDatasDisplay() {};
+        ~GameDatasDisplay(void){};
 
         void run(void) override;
 
-        bool windowIsOpen() const
-        {
-            return _windowIsOpen;
-        }
+        bool windowIsOpen(void) const { return _windowIsOpen; }
 
     private:
-        void _setupWindow()
-        {
-            InitWindow(800, 600, "GameDatasDisplay");
-            SetTargetFPS(60);
-            ToggleFullscreen();
-        }
-        void _setupShaders()
-        {
-            _shaderCRT = LoadShader(0, "assets/shaders/CRT.fs");
-            _textureCRT = LoadTexture("assets/textures/CRT.png");
-
-        }
-        void _draw()
-        {
-            static float seconds = 0;
-            seconds += GetFrameTime();
-
-            BeginDrawing();
-            float screenSize[2] = {(float)GetScreenWidth(), (float)GetScreenHeight()};
-
-            SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iResolution"), &screenSize, SHADER_UNIFORM_VEC2);
-
-            SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iTime"), &seconds, SHADER_UNIFORM_FLOAT);
-
-            BeginShaderMode(_shaderCRT);
-            ClearBackground(BLACK);
-            DrawTexture(_textureCRT, 0 ,0 , WHITE);
-            DrawTexture(_textureCRT, 500, 500, WHITE);
-            EndShaderMode();
-            _drawRadar();
-            _drawBlasterOverheat();
-            _drawMissileWarning();
-            _drawShipState();
-            _drawWallsWarning();
-            EndDrawing();
-        }
-        void _update()
-        {
-            _draw();
-            _handleEvent();
-        }
-        void _handleEvent()
-        {
-            if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE))
-            {
-                CloseWindow();
-                _windowIsOpen = false;
-            }
-        }
-        void _drawRadar()
-        {
-            // draw a cone representing the radar
-            // DrawTriangle(
-            //     {400, 300},
-            //     {(float)(400 + (cos(_RADAR_ANGLE) * 200)), (float)(300 + (sin(_RADAR_ANGLE) * 200))},
-            //     {(float)(400 + (cos(-_RADAR_ANGLE) * 200)), (float)(300 + (sin(-_RADAR_ANGLE) * 200))},
-            //     RED
-            // );
-            DrawText(("X: " + std::to_string(_gameDatas.shipPos.x)).c_str(), 60, 0, 20, RED);
-            DrawText(("Y: " + std::to_string(_gameDatas.shipPos.y)).c_str(), 60, 20, 20, RED);
-        }
-        void _drawBlasterOverheat()
-        {
-            // DrawRectangle(0, 0, _gameDatas.blasterOverheat, 20, RED);
-            // DrawRectangle(0, 0, _MAX_BLASTER_OVER_HEAT, 20, GREEN);
-            DrawText(std::to_string(_gameDatas.blasterOverheat).c_str(), 0, 0, 20, RED);
-        }
-        void _drawMissileWarning()
-        {
-            DrawText(std::to_string(_gameDatas.missileWarning).c_str(), 40, 0, 20, RED);
-        }
-        void _drawShipState()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                DrawText(std::to_string(_gameDatas.shipState[i]).c_str(), 0, 20 + (i * 20), 20, RED);
-            }
-        }
-        void _drawWallsWarning()
-        {
-            DrawText(std::to_string(_gameDatas.wallsWarning).c_str(), 40, 20, 20, RED);
-        }
+        void _setupWindow(void);
+        void _setupShaders(void);
+        void _draw(void);
+        void _update(void);
+        void _handleEvent(void);
+        void _drawRadar(void);
+        void _drawBlasterOverheat(void);
+        void _drawMissileWarning(void);
+        void _drawShipState(void);
+        void _drawWallsWarning(void);
 
     private:
         const Game::GameDatas &_gameDatas;
