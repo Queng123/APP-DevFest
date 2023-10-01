@@ -8,16 +8,26 @@ MAIN		=	main.cpp
 
 NAME		=	pi-display
 
+SRC			=	src/display/GameDatasDisplay.cpp
+
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++17
+
+OBJ			=	$(SRC:.cpp=.o)
+
 C++			=	g++
+
+%.o: %.cpp
+	$(C++) $(INCLUDE) $(CXXFLAGS) -c $< -o $@
 
 compile: $(NAME)
 
-$(NAME):
-	$(C++) $(MAIN) $(INCLUDE) $(LIB_THREAD) $(LIB_RAYLIB) $(CXXFLAGS) -o $(NAME)
+$(NAME): $(OBJ)
+	$(C++) $(MAIN) $(OBJ) $(INCLUDE) $(LIB_THREAD) $(LIB_RAYLIB) $(CXXFLAGS) -o $(NAME)
 
 clean:
-	rm -f $(NAME)
+	rm -f $(OBJ)
 
 fclean: clean
+	rm -f $(NAME)
 
 re: clean compile

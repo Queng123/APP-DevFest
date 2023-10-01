@@ -20,22 +20,12 @@ namespace Display
     {
     public:
         GameDatasDisplay(const Game::GameDatas &gameDatas)
-            : _gameDatas(gameDatas), _windowIsOpen(true)
-        {
-        }
-        ~GameDatasDisplay()
-        {
-        }
+            : _gameDatas(gameDatas), _windowIsOpen(true) {};
 
-        void run() override
-        {
-            _setupWindow();
-            _setupShaders();
-            while (windowIsOpen())
-            {
-                _update();
-            }
-        }
+        ~GameDatasDisplay() {};
+
+        void run(void) override;
+
         bool windowIsOpen() const
         {
             return _windowIsOpen;
