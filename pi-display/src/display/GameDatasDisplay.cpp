@@ -28,6 +28,10 @@ void Display::GameDatasDisplay::_setupShaders(void)
 {
     _shaderCRT = LoadShader(0, "assets/shaders/CRT.fs");
     _textureCRT = LoadTexture("assets/textures/CRT.png");
+    _radarImage = GenImageColor(10, 10, RED);
+    _radar = LoadTextureFromImage(_radarImage);
+    _shipStateImage = GenImageColor(10, 10, RED);
+    _shipState = LoadTextureFromImage(_shipStateImage);
 }
 
 void Display::GameDatasDisplay::_draw(void)
@@ -35,15 +39,67 @@ void Display::GameDatasDisplay::_draw(void)
     BeginDrawing();
     BeginShaderMode(_shaderCRT);
     ClearBackground(BLACK);
-    DrawTexture(_textureCRT, 0, 0, WHITE);
-    DrawTexture(_textureCRT, 500, 500, WHITE);
+
+    // Image imBlank = GenImageColor(1024, 1024, RED);
+    // Image image = LoadImage("assets/textures/CRT.png");
+    // UnloadImage(image);
+
+    DrawTexture(_shipState, 0, 0, WHITE);
+    DrawTexture(_radar, GetRenderWidth() / 2, 0, WHITE);
+
+
+    // Texture2D radar = _getRadarScreen();
+    // Texture2D shipState = _getShipStateScreen();
+
+    // DrawTexture(radar, 0, 0, WHITE);
+    // DrawTexture(shipState, GetRenderWidth() / 2, 0, WHITE);
+
+    // UnloadTexture(radar);
+    // UnloadTexture(shipState);
+
+    // DrawTexture(_getShipStateScreen(), 0, 0, WHITE);
+    // DrawTexture(_getRadarScreen(), 0, 100, WHITE);
+    // DrawTexture(_textureCRT, 0, 0, WHITE); //* DEBUG
+    // DrawTexture(_textureCRT, 500, 500, WHITE); //* DEBUG
     EndShaderMode();
-    _drawRadar();
-    _drawBlasterOverheat();
-    _drawMissileWarning();
-    _drawShipState();
-    _drawWallsWarning();
     EndDrawing();
+}
+
+#include <iostream>
+void Display::GameDatasDisplay::_updateShipStateScreen(void)
+{
+    if (_shipStateImage.width != GetRenderWidth() / 2 || _shipStateImage.height != GetRenderHeight()) {
+        UnloadImage(_shipStateImage);
+        _shipStateImage = GenImageColor(GetRenderWidth() / 2, GetRenderHeight(), BLACK);
+    }
+    ImageClearBackground(&_shipStateImage, BLACK);
+
+    // Apply ship state
+
+    if (_shipState.width != _shipStateImage.width || _shipState.height != _shipStateImage.height) {
+        UnloadTexture(_shipState);
+        _shipState = LoadTextureFromImage(_shipStateImage);
+    } else {
+        UpdateTexture(_shipState, _shipStateImage.data);
+    }
+}
+
+void Display::GameDatasDisplay::_updateRadarScreen(void)
+{
+    if (_radarImage.width != GetRenderWidth() / 2 || _radarImage.height != GetRenderHeight()) {
+        UnloadImage(_radarImage);
+        _radarImage = GenImageColor(GetRenderWidth() / 2, GetRenderHeight(), BLACK);
+    }
+    ImageClearBackground(&_radarImage, BLACK);
+
+    // Apply radar
+
+    if (_radar.width != _radarImage.width || _radar.height != _radarImage.height) {
+        UnloadTexture(_radar);
+        _radar = LoadTextureFromImage(_radarImage);
+    } else {
+        UpdateTexture(_radar, _radarImage.data);
+    }
 }
 
 void Display::GameDatasDisplay::_updateShaders(void)
@@ -59,6 +115,8 @@ void Display::GameDatasDisplay::_updateShaders(void)
 void Display::GameDatasDisplay::_update(void)
 {
     _updateShaders();
+    _updateShipStateScreen();
+    _updateRadarScreen();
     _draw();
     _handleEvent();
 }

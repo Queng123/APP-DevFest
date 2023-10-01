@@ -29,6 +29,8 @@ namespace Display
         bool windowIsOpen(void) const { return _windowIsOpen; }
 
     private:
+        void _updateShipStateScreen(void);
+        void _updateRadarScreen(void);
         void _setupWindow(void);
         void _setupShaders(void);
         void _draw(void);
@@ -48,5 +50,9 @@ namespace Display
         const float _RADAR_ANGLE = 0.78539816339;
         Shader _shaderCRT;
         Texture2D _textureCRT;
+        Texture2D _radar;
+        Texture2D _shipState;
+        Image _radarImage;
+        Image _shipStateImage;
     };
 }
