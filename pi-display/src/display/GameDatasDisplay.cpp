@@ -34,45 +34,29 @@ void Display::GameDatasDisplay::_setupShaders(void)
     _shipState = LoadTextureFromImage(_shipStateImage);
 }
 
+#include <iostream>
 void Display::GameDatasDisplay::_draw(void)
 {
     BeginDrawing();
     BeginShaderMode(_shaderCRT);
     ClearBackground(BLACK);
 
-    // Image imBlank = GenImageColor(1024, 1024, RED);
-    // Image image = LoadImage("assets/textures/CRT.png");
-    // UnloadImage(image);
-
     DrawTexture(_shipState, 0, 0, WHITE);
     DrawTexture(_radar, GetRenderWidth() / 2, 0, WHITE);
 
-
-    // Texture2D radar = _getRadarScreen();
-    // Texture2D shipState = _getShipStateScreen();
-
-    // DrawTexture(radar, 0, 0, WHITE);
-    // DrawTexture(shipState, GetRenderWidth() / 2, 0, WHITE);
-
-    // UnloadTexture(radar);
-    // UnloadTexture(shipState);
-
-    // DrawTexture(_getShipStateScreen(), 0, 0, WHITE);
-    // DrawTexture(_getRadarScreen(), 0, 100, WHITE);
     // DrawTexture(_textureCRT, 0, 0, WHITE); //* DEBUG
     // DrawTexture(_textureCRT, 500, 500, WHITE); //* DEBUG
     EndShaderMode();
     EndDrawing();
 }
 
-#include <iostream>
 void Display::GameDatasDisplay::_updateShipStateScreen(void)
 {
     if (_shipStateImage.width != GetRenderWidth() / 2 || _shipStateImage.height != GetRenderHeight()) {
         UnloadImage(_shipStateImage);
         _shipStateImage = GenImageColor(GetRenderWidth() / 2, GetRenderHeight(), BLACK);
     }
-    ImageClearBackground(&_shipStateImage, BLACK);
+    ImageClearBackground(&_shipStateImage, {0, 11, 3, 255});
 
     // Apply ship state
 
@@ -90,7 +74,7 @@ void Display::GameDatasDisplay::_updateRadarScreen(void)
         UnloadImage(_radarImage);
         _radarImage = GenImageColor(GetRenderWidth() / 2, GetRenderHeight(), BLACK);
     }
-    ImageClearBackground(&_radarImage, BLACK);
+    ImageClearBackground(&_radarImage, {0, 11, 3, 255});
 
     // Apply radar
 
