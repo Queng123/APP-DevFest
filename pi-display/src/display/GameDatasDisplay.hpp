@@ -33,6 +33,7 @@ namespace Display
         void _setupShaders(void);
         void _draw(void);
         void _update(void);
+        void _updateShaders(void);
         void _handleEvent(void);
         void _drawRadar(void);
         void _drawBlasterOverheat(void);

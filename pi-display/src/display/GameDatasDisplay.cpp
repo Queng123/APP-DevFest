@@ -32,16 +32,7 @@ void Display::GameDatasDisplay::_setupShaders(void)
 
 void Display::GameDatasDisplay::_draw(void)
 {
-    static float seconds = 0;
-    seconds += GetFrameTime();
-
     BeginDrawing();
-    float screenSize[2] = {(float)GetScreenWidth(), (float)GetScreenHeight()};
-
-    SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iResolution"), &screenSize, SHADER_UNIFORM_VEC2);
-
-    SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iTime"), &seconds, SHADER_UNIFORM_FLOAT);
-
     BeginShaderMode(_shaderCRT);
     ClearBackground(BLACK);
     DrawTexture(_textureCRT, 0, 0, WHITE);
@@ -55,8 +46,19 @@ void Display::GameDatasDisplay::_draw(void)
     EndDrawing();
 }
 
+void Display::GameDatasDisplay::_updateShaders(void)
+{
+    static float seconds = 0;
+    seconds += GetFrameTime();
+    float screenSize[2] = {(float)GetScreenWidth(), (float)GetScreenHeight()};
+
+    SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iResolution"), &screenSize, SHADER_UNIFORM_VEC2);
+    SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iTime"), &seconds, SHADER_UNIFORM_FLOAT);
+}
+
 void Display::GameDatasDisplay::_update(void)
 {
+    _updateShaders();
     _draw();
     _handleEvent();
 }
