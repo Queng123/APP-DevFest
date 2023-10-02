@@ -16,8 +16,28 @@
 
 namespace Display
 {
+    constexpr Color NORMAL_COLOR = WHITE;
+    constexpr Color DAMAGED_COLOR = ORANGE;
+    constexpr Color DESTROY_COLOR = RED;
     class GameDatasDisplay : public Display::IDisplay
     {
+    public:
+        enum class SHIP_ELEMENT
+        {
+            MIDDLE_PART = 1,
+            WINDOW = 2,
+            CABLE_MANAGEMENT = 3,
+            CABLE_MANAGEMENT_OBJECT = 4,
+            BOT_LEFT_WING = 5,
+            BOT_LEFT_WING_DETAILS = 6,
+            TOP_RIGHT_WING = 7,
+            TOP_RIGHT_WING_DETAILS = 8,
+            BOT_RIGHT_WING = 9,
+            BOT_RIGHT_WING_DETAILS = 10,
+            TOP_LEFT_WING = 11,
+            TOP_LEFT_WING_DETAILS = 12
+        };
+
     public:
         GameDatasDisplay(const Game::GameDatas &gameDatas)
             : _gameDatas(gameDatas), _windowIsOpen(true){};
@@ -50,6 +70,7 @@ namespace Display
         const float _RADAR_ANGLE = 0.78539816339;
         Shader _shaderCRT;
         Texture2D _textureCRT;
+        Model _xWingModel;
         RenderTexture2D _radarRenderTexture;
         RenderTexture2D _shipStateRenderTexture;
     };
