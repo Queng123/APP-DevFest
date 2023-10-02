@@ -60,8 +60,8 @@ void Display::GameDatasDisplay::_setupShaders(void)
         _xWingModel.materials[10].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("assets/textures/detalles.png");
         _xWingModel.materials[11].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("assets/textures/ala._2.png");
         _xWingModel.materials[12].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("assets/textures/detalles.png");
+        _xWingModel.transform = MatrixRotateX(PI / 2);
     }
-    _xWingModel.transform = MatrixRotateX(PI / 2);
 }
 
 void Display::GameDatasDisplay::_draw(void)
@@ -105,6 +105,71 @@ void Display::GameDatasDisplay::_updateShipStateScreen(void)
         DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
     }
     EndMode3D();
+
+    // BeginMode3D(camera);
+    // if (IsModelReady(_xWingModel)) {
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
+    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, {255, 255, 255, 100});
+    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, GREEN);
+    // }
+    // EndMode3D();
+
+    // BeginMode3D(camera);
+    // if (IsModelReady(_xWingModel)) {
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
+    // }
+    // EndMode3D();
+
+    // BeginMode3D(camera);
+    // if (IsModelReady(_xWingModel)) {
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
+    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, { 255, 255, 255, 100 });
+    // }
+    // EndMode3D();
+
+    // BeginMode3D(camera);
+    // if (IsModelReady(_xWingModel)) {
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
+    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, { 0, 228, 48, 100 });
+    // }
+    // EndMode3D();
 
     EndTextureMode();
 }
