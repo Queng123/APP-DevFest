@@ -50,9 +50,7 @@ namespace Display
         const float _RADAR_ANGLE = 0.78539816339;
         Shader _shaderCRT;
         Texture2D _textureCRT;
-        Texture2D _radar;
-        Texture2D _shipState;
-        Image _radarImage;
-        Image _shipStateImage;
+        RenderTexture2D _radarRenderTexture;
+        RenderTexture2D _shipStateRenderTexture;
     };
 }
