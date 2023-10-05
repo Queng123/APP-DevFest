@@ -69,9 +69,12 @@ namespace Display
         const short _MAX_BLASTER_OVER_HEAT = 100;
         const float _RADAR_ANGLE = 0.78539816339;
         Shader _shaderCRT;
+        Shader _shaderOverheat;
         Texture2D _textureCRT;
         Model _xWingModel;
         RenderTexture2D _radarRenderTexture;
+        RenderTexture2D _radarRenderTexturePostProcess;
         RenderTexture2D _shipStateRenderTexture;
+        RenderTexture2D _shipStateRenderTexturePostProcess;
     };
 }

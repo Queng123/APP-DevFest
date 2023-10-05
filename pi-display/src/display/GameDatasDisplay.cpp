@@ -30,9 +30,12 @@ void Display::GameDatasDisplay::_setupWindow(void)
 void Display::GameDatasDisplay::_setupShaders(void)
 {
     _shaderCRT = LoadShader(0, "assets/shaders/CRT.fs");
+    _shaderOverheat = LoadShader(0, "assets/shaders/overheat.fs");
     _textureCRT = LoadTexture("assets/textures/CRT.png");
     _radarRenderTexture = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
+    _radarRenderTexturePostProcess = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
     _shipStateRenderTexture = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
+    _shipStateRenderTexturePostProcess = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
     _xWingModel = LoadModel("assets/models/x-wing final.gltf");
     if (IsModelReady(_xWingModel)) {
         // 0 I don't know
@@ -68,14 +71,12 @@ void Display::GameDatasDisplay::_setupShaders(void)
 void Display::GameDatasDisplay::_draw(void)
 {
     BeginDrawing();
-    BeginShaderMode(_shaderCRT);
+    BeginShaderMode(_shaderOverheat);
     ClearBackground(BLACK);
 
-    DrawTexture(_shipStateRenderTexture.texture, 0, 0, WHITE);
-    DrawTexture(_radarRenderTexture.texture, GetRenderWidth() / 2, 0, WHITE);
+    DrawTextureRec(_shipStateRenderTexturePostProcess.texture, (Rectangle){0, 0, (float)_shipStateRenderTexturePostProcess.texture.width, (float)-_shipStateRenderTexturePostProcess.texture.height}, (Vector2){0, 0}, WHITE);
+    DrawTextureRec(_radarRenderTexturePostProcess.texture, (Rectangle){0, 0, (float)_radarRenderTexturePostProcess.texture.width, (float)-_radarRenderTexturePostProcess.texture.height}, (Vector2){(float)GetRenderWidth() / 2, 0}, WHITE);
 
-    // DrawTexture(_textureCRT, 0, 0, WHITE); //* DEBUG
-    // DrawTexture(_textureCRT, 500, 500, WHITE); //* DEBUG
     EndShaderMode();
     EndDrawing();
 }
@@ -84,7 +85,9 @@ void Display::GameDatasDisplay::_updateShipStateScreen(void)
 {
     if (_shipStateRenderTexture.texture.width != GetRenderWidth() / 2 || _shipStateRenderTexture.texture.height != GetRenderHeight()) {
         UnloadRenderTexture(_shipStateRenderTexture);
+        UnloadRenderTexture(_shipStateRenderTexturePostProcess);
         _shipStateRenderTexture = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
+        _shipStateRenderTexturePostProcess = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
     }
     BeginTextureMode(_shipStateRenderTexture);
     ClearBackground((Color){0, 10, 3, 0});
@@ -167,17 +170,29 @@ void Display::GameDatasDisplay::_updateShipStateScreen(void)
     // EndMode3D();
 
     EndTextureMode();
+    BeginTextureMode(_shipStateRenderTexturePostProcess);
+    BeginShaderMode(_shaderCRT);
+    DrawTexture(_shipStateRenderTexture.texture, 0, 0, WHITE);
+    EndShaderMode();
+    EndTextureMode();
 }
 
 void Display::GameDatasDisplay::_updateRadarScreen(void)
 {
     if (_radarRenderTexture.texture.width != GetRenderWidth() / 2 || _radarRenderTexture.texture.height != GetRenderHeight()) {
         UnloadRenderTexture(_radarRenderTexture);
+        UnloadRenderTexture(_radarRenderTexturePostProcess);
         _radarRenderTexture = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
+        _radarRenderTexturePostProcess = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
     }
     BeginTextureMode(_radarRenderTexture);
     ClearBackground((Color){0, 10, 3, 255});
     _drawRadar();
+    EndTextureMode();
+    BeginTextureMode(_radarRenderTexturePostProcess);
+    BeginShaderMode(_shaderCRT);
+    DrawTexture(_radarRenderTexture.texture, 0, 0, WHITE);
+    EndShaderMode();
     EndTextureMode();
 }
 
@@ -189,6 +204,7 @@ void Display::GameDatasDisplay::_updateShaders(void)
 
     SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iResolution"), &screenSize, SHADER_UNIFORM_VEC2);
     SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iTime"), &seconds, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(_shaderOverheat, GetShaderLocation(_shaderOverheat, "overheat"), &_gameDatas.blasterOverheat, SHADER_UNIFORM_INT);
 }
 
 void Display::GameDatasDisplay::_update(void)
