@@ -114,11 +114,11 @@ namespace Network
         }
         void _receive()
         {
-            ssize_t received = Network::recvfrom(_fd, &_receiveData, sizeof(Receive), 0, _servinfo->ai_addr, &_servinfo->ai_addrlen);
+            Network::recvfrom(_fd, &_receiveData, sizeof(Receive), 0, _servinfo->ai_addr, &_servinfo->ai_addrlen);
         }
         void _send()
         {
-            ssize_t sended = Network::sendto(_fd, &_sendData, sizeof(Send), 0, _servinfo->ai_addr, _servinfo->ai_addrlen);
+            Network::sendto(_fd, &_sendData, sizeof(Send), 0, _servinfo->ai_addr, _servinfo->ai_addrlen);
         }
 
     private:

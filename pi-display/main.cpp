@@ -20,6 +20,6 @@ int main(void)
     Display::ThreadedGameDatasDisplay display(*client);
 
     while (display.windowIsOpen()) {
-        // std::cout << client->nbEnemies << std::endl;
+        // std::cout << client->shipPos.x << std::endl;
     }
 }
