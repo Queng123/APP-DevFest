@@ -234,18 +234,35 @@ void Display::GameDatasDisplay::_drawRadar(void)
         if (Vector2Length(enemyPos) <= distance)
             enemiesInCircle.push_back({enemyPos.x * ratio, enemyPos.y * ratio});
     }
-
+    Vector2 trianglePoints[3] = {
+        {circleCenter.x, circleCenter.y},
+        {circleCenter.x + radius * cosf(DEG2RAD * angle), circleCenter.y + radius * sinf(DEG2RAD * angle)},
+        {circleCenter.x + radius * cosf(DEG2RAD * (angle + angleSpeed)), circleCenter.y + radius * sinf(DEG2RAD * (angle + angleSpeed))},
+    };
+    DrawTriangle(trianglePoints[0], trianglePoints[2], trianglePoints[1], (Color){0, 150, 0, 255});
     for (auto &enemyInCircle: enemiesInCircle)
     {
-        // check if enemy is in the angle of the circle
-        // add it
-        detectedEnemies.push_back(std::pair<std::pair<float, float>, float>(enemyInCircle, 1.f));
+        Vector2 enemyPos = {enemyInCircle.first + circleCenter.x, enemyInCircle.second + circleCenter.y};
+        if (CheckCollisionPointTriangle(enemyPos, trianglePoints[0], trianglePoints[2], trianglePoints[1]))
+        {
+            bool alreadyDetected = false;
+            for (auto &detectedEnemy: detectedEnemies)
+            {
+                if (detectedEnemy.first.first == enemyInCircle.first && detectedEnemy.first.second == enemyInCircle.second)
+                {
+                    alreadyDetected = true;
+                    detectedEnemy.second = 1.f;
+                }
+            }
+            if (!alreadyDetected)
+                detectedEnemies.push_back({enemyInCircle, 1.f});
+        }
     }
 
     for (auto &detectedEnemy: detectedEnemies)
     {
-        DrawCircle(detectedEnemy.first.first + circleCenter.x, detectedEnemy.first.second + circleCenter.y, 5, (Color){0, static_cast<unsigned char>(255.f * detectedEnemy.second), 0, 255});
-        detectedEnemy.second -= 0.01;
+        DrawCircle(detectedEnemy.first.first + circleCenter.x, detectedEnemy.first.second + circleCenter.y, 10 - (6 - 6 * detectedEnemy.second), (Color){0, static_cast<unsigned char>(255.f * detectedEnemy.second), 0, 255});
+        detectedEnemy.second -= 0.003;
         if (detectedEnemy.second <= 0)
             detectedEnemies.erase(detectedEnemies.begin());
     }
