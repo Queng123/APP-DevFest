@@ -8,6 +8,7 @@
 #include "GameDatasDisplay.hpp"
 #include "raymath.h"
 #include <iostream>
+#include <vector>
 
 void Display::GameDatasDisplay::run(void)
 {
@@ -91,20 +92,14 @@ void Display::GameDatasDisplay::_updateShipStateScreen(void)
     static Camera camera = { (Vector3){ 20.0f, -10.0f, 0.0f }, (Vector3){ 0.0f, 0.0f, 0.0f }, (Vector3){ 0.0f, 1.0f, 0.0f }, 10.0f, CAMERA_ORTHOGRAPHIC   };
     static float rotation = 0.0f;
     rotation += GetFrameTime() * 10;
-    // if (IsKeyDown(KEY_LEFT)) {
-    //     rotation -= 5;
-    // }
-    // if (IsKeyDown(KEY_RIGHT)) {
-    //     rotation += 5;
-    // }
 
-    BeginMode3D(camera);
-    if (IsModelReady(_xWingModel)) {
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
-        DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
-    }
-    EndMode3D();
+    // BeginMode3D(camera);
+    // if (IsModelReady(_xWingModel)) {
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
+    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
+    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
+    // }
+    // EndMode3D();
 
     // BeginMode3D(camera);
     // if (IsModelReady(_xWingModel)) {
@@ -133,24 +128,24 @@ void Display::GameDatasDisplay::_updateShipStateScreen(void)
     // }
     // EndMode3D();
 
-    // BeginMode3D(camera);
-    // if (IsModelReady(_xWingModel)) {
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
-    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, { 255, 255, 255, 100 });
-    // }
-    // EndMode3D();
+    BeginMode3D(camera);
+    if (IsModelReady(_xWingModel)) {
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
+        DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, { 255, 255, 255, 100 });
+    }
+    EndMode3D();
 
     // BeginMode3D(camera);
     // if (IsModelReady(_xWingModel)) {
@@ -181,9 +176,8 @@ void Display::GameDatasDisplay::_updateRadarScreen(void)
         _radarRenderTexture = LoadRenderTexture(GetRenderWidth() / 2, GetRenderHeight());
     }
     BeginTextureMode(_radarRenderTexture);
-    ClearBackground(BLACK);
-    // _drawRadar();
-    // _drawWallsWarning();
+    ClearBackground((Color){0, 10, 3, 255});
+    _drawRadar();
     EndTextureMode();
 }
 
@@ -217,8 +211,44 @@ void Display::GameDatasDisplay::_handleEvent(void)
 
 void Display::GameDatasDisplay::_drawRadar(void)
 {
-    DrawText(("X: " + std::to_string(_gameDatas.shipPos.x)).c_str(), 60, 0, 20, RED);
-    DrawText(("Y: " + std::to_string(_gameDatas.shipPos.y)).c_str(), 60, 20, 20, RED);
+    static float angle = 0.0f; // From 0 to 360
+    const static float angleSpeed = 1.f;
+    const static float distance = 20.f;
+    static std::vector<std::pair<std::pair<float, float>, float>> detectedEnemies; // float is 10 and decrease by 0.1 each frame. It allow to display enemies on radar and remove them after a while
+    std::vector<std::pair<float, float>> enemiesInCircle;
+    Vector2 circleCenter = {GetRenderWidth() / 4.f, (float)GetRenderHeight() / 2.f};
+    float radius = (float)GetRenderWidth() / 5.f;
+
+    angle += angleSpeed;
+    if (angle >= 360)
+        angle -= 360;
+
+    DrawCircleGradient(circleCenter.x, circleCenter.y, radius, (Color){0, 0, 0, 0}, (Color){0, 20, 7, 255});
+    DrawCircleLines(circleCenter.x, circleCenter.y, radius, (Color){0, 50, 10, 255});
+    DrawLine(circleCenter.x, circleCenter.y, circleCenter.x + radius * cosf(DEG2RAD * angle), circleCenter.y + radius * sinf(DEG2RAD * angle), (Color){0, 255, 0, 255});
+
+    for (size_t i = 0; i < _gameDatas.nbEnemies; i++)
+    {
+        float ratio = radius / distance;
+        Vector2 enemyPos = {(float)_gameDatas.enemiesPos[i].x - (float)_gameDatas.shipPos.x, (float)_gameDatas.enemiesPos[i].y - (float)_gameDatas.shipPos.y};
+        if (Vector2Length(enemyPos) <= distance)
+            enemiesInCircle.push_back({enemyPos.x * ratio, enemyPos.y * ratio});
+    }
+
+    for (auto &enemyInCircle: enemiesInCircle)
+    {
+        // check if enemy is in the angle of the circle
+        // add it
+        detectedEnemies.push_back(std::pair<std::pair<float, float>, float>(enemyInCircle, 1.f));
+    }
+
+    for (auto &detectedEnemy: detectedEnemies)
+    {
+        DrawCircle(detectedEnemy.first.first + circleCenter.x, detectedEnemy.first.second + circleCenter.y, 5, (Color){0, static_cast<unsigned char>(255.f * detectedEnemy.second), 0, 255});
+        detectedEnemy.second -= 0.01;
+        if (detectedEnemy.second <= 0)
+            detectedEnemies.erase(detectedEnemies.begin());
+    }
 }
 
 void Display::GameDatasDisplay::_drawBlasterOverheat(void)
