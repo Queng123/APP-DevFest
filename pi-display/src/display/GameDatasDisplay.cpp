@@ -10,6 +10,12 @@
 #include <iostream>
 #include <vector>
 
+#if defined(PLATFORM_DESKTOP)
+    #define GLSL_VERSION 120
+#else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+    #define GLSL_VERSION 100
+#endif
+
 void Display::GameDatasDisplay::run(void)
 {
     _setupWindow();
