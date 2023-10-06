@@ -26,16 +26,31 @@ extern "C" {
 namespace IO {
     class IOHandler {
         public:
-            IOHandler();
-            ~IOHandler();
+            IOHandler()
+            {
+                if (gpioInitialise() < 0) {
+                    throw std::runtime_error("Failed to initialize GPIO");
+                }
+                gpioSetMode(IO_SWITCH_START_1, PI_INPUT);
+                gpioSetMode(IO_SWITCH_START_2, PI_INPUT);
+                gpioSetMode(IO_SWITCH_START_3, PI_INPUT);
+                gpioSetMode(IO_BUTTON_START, PI_INPUT);
+                gpioSetMode(IO_BUTTON_BOMB, PI_INPUT);
+                gpioSetMode(IO_LED_BOMB, PI_OUTPUT);
+                gpioSetMode(IO_LED_MISSILE_WARNING, PI_OUTPUT);
+                gpioSetMode(IO_LED_WALLS_WARNING, PI_OUTPUT);
+            }
+            ~IOHandler() {
+                gpioTerminate();
+            }
 
             const Game::IOInfos *operator->() const
             {
-                return &_gameDatas;
+                return &_ioInfos;
             }
             const Game::IOInfos &operator*() const
             {
-                return _gameDatas;
+                return _ioInfos;
             }
             void operator=(const Game::GameDatas &data)
             {
