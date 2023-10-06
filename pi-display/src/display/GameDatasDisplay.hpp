@@ -9,97 +9,72 @@
 
 #include <raylib.h>
 #include <cmath>
+#include <string>
 
 #include "IDisplay.hpp"
 #include "GameDatas.hpp"
 
-namespace Display {
-    class GameDatasDisplay : public Display::IDisplay {
-        public:
-            GameDatasDisplay(const Game::GameDatas &gameDatas)
-                : _gameDatas(gameDatas), _windowIsOpen(true)
-            {
+namespace Display
+{
+    constexpr Color NORMAL_COLOR = WHITE;
+    constexpr Color DAMAGED_COLOR = ORANGE;
+    constexpr Color DESTROY_COLOR = RED;
+    class GameDatasDisplay : public Display::IDisplay
+    {
+    public:
+        enum class SHIP_ELEMENT
+        {
+            MIDDLE_PART = 1,
+            WINDOW = 2,
+            CABLE_MANAGEMENT = 3,
+            CABLE_MANAGEMENT_OBJECT = 4,
+            BOT_LEFT_WING = 5,
+            BOT_LEFT_WING_DETAILS = 6,
+            TOP_RIGHT_WING = 7,
+            TOP_RIGHT_WING_DETAILS = 8,
+            BOT_RIGHT_WING = 9,
+            BOT_RIGHT_WING_DETAILS = 10,
+            TOP_LEFT_WING = 11,
+            TOP_LEFT_WING_DETAILS = 12
+        };
 
-            }
-            ~GameDatasDisplay()
-            {
+    public:
+        GameDatasDisplay(const Game::GameDatas &gameDatas)
+            : _gameDatas(gameDatas), _windowIsOpen(true){};
 
-            }
+        ~GameDatasDisplay(void){};
 
-            void run() override
-            {
-                _setupWindow();
-                while (windowIsOpen()) {
-                    _update();
-                }
-            }
-            bool windowIsOpen() const
-            {
-                return _windowIsOpen;
-            }
-        private:
-            void _setupWindow()
-            {
-                InitWindow(800, 600, "GameDatasDisplay");
-                SetTargetFPS(60);
-                ToggleFullscreen();
-            }
-            void _draw()
-            {
-                BeginDrawing();
-                ClearBackground(BLACK);
-                _drawRadar();
-                _drawBlasterOverheat();
-                _drawMissileWarning();
-                _drawShipState();
-                _drawWallsWarning();
-                EndDrawing();
-            }
-            void _update()
-            {
-                _draw();
-                _handleEvent();
-            }
-            void _handleEvent()
-            {
-                if (WindowShouldClose() || IsKeyPressed(KEY_ESCAPE)) {
-                    CloseWindow();
-                    _windowIsOpen = false;
-                }
-            }
-            void _drawRadar()
-            {
-                // draw a cone representing the radar
-                // DrawTriangle(
-                //     {400, 300},
-                //     {(float)(400 + (cos(_RADAR_ANGLE) * 200)), (float)(300 + (sin(_RADAR_ANGLE) * 200))},
-                //     {(float)(400 + (cos(-_RADAR_ANGLE) * 200)), (float)(300 + (sin(-_RADAR_ANGLE) * 200))},
-                //     RED
-                // );
-            }
-            void _drawBlasterOverheat()
-            {
-                // DrawRectangle(0, 0, _gameDatas.blasterOverheat, 20, RED);
-                // DrawRectangle(0, 0, _MAX_BLASTER_OVER_HEAT, 20, GREEN);
-            }
-            void _drawMissileWarning()
-            {
-                DrawText(std::to_string(_gameDatas.missileWarning).c_str(), 40, 0, 20, RED);
-            }
-            void _drawShipState()
-            {
-                for (int i = 0; i < 5; i++) {
-                    DrawText(std::to_string(_gameDatas.shipState[i]).c_str(), 0, 20 + (i * 20), 20, RED);
-                }
-            }
-            void _drawWallsWarning()
-            {
-                DrawText(std::to_string(_gameDatas.wallsWarning).c_str(), 40, 20, 20, RED);
-            }
-        private:
-            const Game::GameDatas &_gameDatas;
-            bool _windowIsOpen;
-            const short _MAX_BLASTER_OVER_HEAT = 100;
-            const float _RADAR_ANGLE = 0.78539816339;
+        void run(void) override;
+
+        bool windowIsOpen(void) const { return _windowIsOpen; }
+
+    private:
+        void _updateShipStateScreen(void);
+        void _updateRadarScreen(void);
+        void _setupWindow(void);
+        void _setupShaders(void);
+        void _draw(void);
+        void _update(void);
+        void _updateShaders(void);
+        void _handleEvent(void);
+        void _drawRadar(void);
+        void _drawBlasterOverheat(void);
+        void _drawMissileWarning(void);
+        void _drawShipState(void);
+        void _drawWallsWarning(void);
+
+    private:
+        const Game::GameDatas &_gameDatas;
+        bool _windowIsOpen;
+        const short _MAX_BLASTER_OVER_HEAT = 100;
+        const float _RADAR_ANGLE = 0.78539816339;
+        Shader _shaderCRT;
+        Shader _shaderOverheat;
+        Texture2D _textureCRT;
+        Model _xWingModel;
+        RenderTexture2D _radarRenderTexture;
+        RenderTexture2D _radarRenderTexturePostProcess;
+        RenderTexture2D _shipStateRenderTexture;
+        RenderTexture2D _shipStateRenderTexturePostProcess;
     };
 }
