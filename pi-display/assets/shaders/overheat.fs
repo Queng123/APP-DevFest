@@ -9,11 +9,15 @@ void main()
     vec3 col = texture(screenTexture, uv).rgb;
 
     vec3 overheatColor = vec3(1.0, 0.0, 0.0);
-    float overheatAmount = float(overheat) / 100.0;
+    float overheatValue = overheat;
+    if (overheatValue > 100) {
+        overheatValue = 100;
+    }
+    float overheatAmount = overheatValue / 100.0;
 
     // get center
     vec2 center = vec2(0.5, 0.5);
-    float dist = distance(uv, center);
+    float dist = distance(uv, center) - 0.3;
     float overheatDist = 0.5;
 
     col = mix(col, overheatColor, dist * overheatAmount);

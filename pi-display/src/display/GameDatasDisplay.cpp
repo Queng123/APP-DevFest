@@ -196,6 +196,8 @@ void Display::GameDatasDisplay::_updateRadarScreen(void)
     EndTextureMode();
 }
 
+#include <bitset>
+
 void Display::GameDatasDisplay::_updateShaders(void)
 {
     static float seconds = 0;
@@ -204,7 +206,8 @@ void Display::GameDatasDisplay::_updateShaders(void)
 
     SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iResolution"), &screenSize, SHADER_UNIFORM_VEC2);
     SetShaderValue(_shaderCRT, GetShaderLocation(_shaderCRT, "iTime"), &seconds, SHADER_UNIFORM_FLOAT);
-    SetShaderValue(_shaderOverheat, GetShaderLocation(_shaderOverheat, "overheat"), &_gameDatas.blasterOverheat, SHADER_UNIFORM_INT);
+    const int &value = static_cast<unsigned int>(_gameDatas.blasterOverheat);
+    SetShaderValue(_shaderOverheat, GetShaderLocation(_shaderOverheat, "overheat"), &value, SHADER_UNIFORM_INT);
 }
 
 void Display::GameDatasDisplay::_update(void)
