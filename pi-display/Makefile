@@ -4,9 +4,9 @@ LIB_RAYLIB	=	-lraylib -ldl
 
 LIB_PIGPIO	=	-lpigpio
 
-INCLUDE		=	-I src/network/client/ -I src/network/ -I src/display -I src/
+INCLUDE		=	-I src/network/client/ -I src/network/ -I src/display -I src/io/ -I src/
 
-MAIN		=	main.cpp
+MAIN		=	Main.cpp
 
 NAME		=	pi-display
 
