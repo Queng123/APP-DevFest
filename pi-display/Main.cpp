@@ -9,17 +9,16 @@
 #include "ThreadedUDPClient.hpp"
 #include "GameDatas.hpp"
 #include "ThreadedGameDatasDisplay.hpp"
-
-typedef struct {
-    char a[255];
-} HuiInfo;
+#include "ThreadedIOHandler.hpp"
 
 int main(void)
 {
-    Network::ThreadedUDPClient<Game::GameDatas, HuiInfo> client;
+    Network::ThreadedUDPClient<Game::GameDatas, Game::IOInfos> client;
     Display::ThreadedGameDatasDisplay display(*client);
+    IO::ThreadedIOHandler ioHandler;
 
     while (display.windowIsOpen()) {
-        // std::cout << client->shipPos.x << std::endl;
+        client = *ioHandler;
+        ioHandler = *client;
     }
 }

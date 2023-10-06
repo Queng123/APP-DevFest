@@ -2,9 +2,11 @@ LIB_THREAD	=	-lpthread
 
 LIB_RAYLIB	=	-lraylib -ldl
 
-INCLUDE		=	-I src/network/client/ -I src/network/ -I src/display -I src/
+LIB_PIGPIO	=	-lpigpio
 
-MAIN		=	main.cpp
+INCLUDE		=	-I src/network/client/ -I src/network/ -I src/display -I src/io/ -I src/
+
+MAIN		=	Main.cpp
 
 NAME		=	pi-display
 
@@ -22,7 +24,7 @@ C++			=	g++
 compile: $(NAME)
 
 $(NAME): $(OBJ)
-	$(C++) $(MAIN) $(OBJ) $(INCLUDE) $(LIB_THREAD) $(LIB_RAYLIB) $(CXXFLAGS) -o $(NAME)
+	$(C++) $(MAIN) $(OBJ) $(INCLUDE) $(LIB_THREAD) $(LIB_RAYLIB) $(LIB_PIGPIO) $(CXXFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

@@ -35,4 +35,10 @@ namespace Game
         bool canSendBomb;
         unsigned int magicNumber;
     };
+
+    struct IOInfos
+    {
+        bool shipStarted;
+        bool bombLaunched;
+    };
 }
