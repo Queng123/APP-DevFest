@@ -30,6 +30,7 @@ namespace IO {
             {
                 _ioInfos.shipStarted = false;
                 _ioInfos.bombLaunched = false;
+                _ioInfos.magicNumber = MAGIC_NUMBER;
                 _needsToStop = false;
                 if (gpioInitialise() < 0) {
                     throw std::runtime_error("Failed to initialize GPIO");
