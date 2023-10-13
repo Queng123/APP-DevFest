@@ -97,84 +97,27 @@ void Display::GameDatasDisplay::_updateShipStateScreen(void)
     }
     BeginTextureMode(_shipStateRenderTexture);
     ClearBackground((Color){0, 10, 3, 0});
-
     static Camera camera = { (Vector3){ 20.0f, -10.0f, 0.0f }, (Vector3){ 0.0f, 0.0f, 0.0f }, (Vector3){ 0.0f, 1.0f, 0.0f }, 10.0f, CAMERA_ORTHOGRAPHIC   };
     static float rotation = 0.0f;
     rotation += GetFrameTime() * 10;
-
-    // BeginMode3D(camera);
-    // if (IsModelReady(_xWingModel)) {
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
-    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
-    // }
-    // EndMode3D();
-
-    // BeginMode3D(camera);
-    // if (IsModelReady(_xWingModel)) {
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
-    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, {255, 255, 255, 100});
-    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, GREEN);
-    // }
-    // EndMode3D();
-
-    // BeginMode3D(camera);
-    // if (IsModelReady(_xWingModel)) {
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
-    // }
-    // EndMode3D();
-
     BeginMode3D(camera);
     if (IsModelReady(_xWingModel)) {
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[0]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[1]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[2]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[3]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[0]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[1]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[2]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[3]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[4]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[4]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[4]));
+        _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = _getColorByStatus(static_cast<Game::ShipState>(_gameDatas.shipState[4]));
         DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
         DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, { 255, 255, 255, 100 });
     }
     EndMode3D();
-
-    // BeginMode3D(camera);
-    // if (IsModelReady(_xWingModel)) {
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DAMAGED_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = DESTROY_COLOR;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::BOT_RIGHT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::TOP_LEFT_WING_DETAILS)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::MIDDLE_PART)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::WINDOW)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     _xWingModel.materials[static_cast<int>(SHIP_ELEMENT::CABLE_MANAGEMENT_OBJECT)].maps[MATERIAL_MAP_DIFFUSE].color = GREEN;
-    //     DrawModelWiresEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, WHITE);
-    //     DrawModelEx(_xWingModel, (Vector3){0.0f, 0.0f, 0.0f}, (Vector3){0.0f, 1.0f, 0.0f}, rotation, (Vector3){3.0f, 3.0f, 3.0f}, { 0, 228, 48, 100 });
-    // }
-    // EndMode3D();
-
     EndTextureMode();
     BeginTextureMode(_shipStateRenderTexturePostProcess);
     BeginShaderMode(_shaderCRT);
@@ -314,4 +257,15 @@ void Display::GameDatasDisplay::_drawShipState(void)
 void Display::GameDatasDisplay::_drawWallsWarning(void)
 {
     DrawText(std::to_string(_gameDatas.wallsWarning).c_str(), 40, 20, 20, RED);
+}
+
+Color Display::GameDatasDisplay::_getColorByStatus(Game::ShipState state)
+{
+    if (state == Game::SHIP_STATE_NORMAL) {
+        return NORMAL_COLOR;
+    } else if (state == Game::SHIP_STATE_SLIGHTLY_DAMAGED) {
+        return DAMAGED_COLOR;
+    } else {
+        return DESTROY_COLOR;
+    }
 }

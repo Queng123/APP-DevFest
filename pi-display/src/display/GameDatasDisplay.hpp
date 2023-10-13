@@ -16,7 +16,7 @@
 
 namespace Display
 {
-    constexpr Color NORMAL_COLOR = WHITE;
+    constexpr Color NORMAL_COLOR = GREEN;
     constexpr Color DAMAGED_COLOR = ORANGE;
     constexpr Color DESTROY_COLOR = RED;
     class GameDatasDisplay : public Display::IDisplay
@@ -64,6 +64,7 @@ namespace Display
         void _drawWallsWarning(void);
 
     private:
+        Color _getColorByStatus(Game::ShipState);
         const Game::GameDatas &_gameDatas;
         bool _windowIsOpen;
         const short _MAX_BLASTER_OVER_HEAT = 100;
