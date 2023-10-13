@@ -17,9 +17,9 @@ namespace Game
 {
     enum ShipState
     {
-        SHIP_STATE_NORMAL = 0,
-        SHIP_STATE_SLIGHTLY_DAMAGED,
-        SHIP_STATE_DAMAGED,
+        SHIP_STATE_NORMAL = 3,
+        SHIP_STATE_SLIGHTLY_DAMAGED = 2,
+        SHIP_STATE_DAMAGED = 1,
     };
     struct GameDatas
     {
@@ -28,7 +28,7 @@ namespace Game
         Vectors::Vector2f enemiesPos[8];
         uint8_t nbMissiles;
         Vectors::Vector2f missilesPos[8];
-        uint8_t blasterOverheat;
+        short blasterOverheat;
         uint8_t shipState[5];
         bool missileWarning;
         bool wallsWarning;
@@ -40,5 +40,6 @@ namespace Game
     {
         bool shipStarted;
         bool bombLaunched;
+        unsigned int magicNumber;
     };
 }
