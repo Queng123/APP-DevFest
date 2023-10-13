@@ -21,12 +21,13 @@ namespace IO {
             }
             ~ThreadedIOHandler()
             {
+                stop();
                 _thread.join();
             }
 
             void run()
             {
-                while (true) {
+                while (!getNeedsToStop()) {
                     update();
                 }
             }
